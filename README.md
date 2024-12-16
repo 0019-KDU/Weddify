@@ -34,11 +34,4 @@ The application follows a **microservices architecture** where each core functio
 - **Kubernetes** for container orchestration (optional)
 - **RabbitMQ / Kafka** for asynchronous communication (optional)
 
-## Setup and Installation
 
-To run this application locally, follow these steps:
-
-1. Clone the repository:
-   ```bash
-   git clone https://github.com/yourusername/Weddify.git
-   cd Weddify
