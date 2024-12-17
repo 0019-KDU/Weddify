@@ -1,9 +1,11 @@
 package com.chiradev.weddify.entity;
 
+import com.chiradev.weddify.client.GuestDto;
 import jakarta.persistence.*;
 import lombok.*;
 
 import java.util.Date;
+import java.util.List;
 
 
 @NoArgsConstructor
@@ -30,4 +32,5 @@ public class EventDBIT0019 {
     @Enumerated(EnumType.STRING)
     @Column(name = "event_type", nullable = false)
     private EventType eventType;
+
 }

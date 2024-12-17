@@ -9,6 +9,9 @@ import com.chiradev.weddify.repository.GuestRepositoryDBIT0019;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+import java.util.stream.Collectors;
+
 @Service
 @RequiredArgsConstructor
 public class GuestServiceDBIT0019 {
@@ -40,6 +43,38 @@ public class GuestServiceDBIT0019 {
         GuestDBIT0019 guest = guestRepositoryDBIT0019.findById(id)
                 .orElseThrow(() -> new RuntimeException("Guest not found with id: " + id));
         guestRepositoryDBIT0019.delete(guest);
+    }
+
+    public void sendRsvpRequest(Long id) {
+        GuestDBIT0019 guest = guestRepositoryDBIT0019.findById(id)
+                .orElseThrow(() -> new RuntimeException("Guest not found with id: " + id));
+        guest.setInvitationSent(true);
+        guestRepositoryDBIT0019.save(guest);
+        // Here you can add email sending logic if required.
+    }
+
+
+    public List<GuestResponseDTODBIT0019> trackRsvpResponses(Long eventId) {
+        List<GuestDBIT0019> guests = guestRepositoryDBIT0019.findAll()
+                .stream()
+                .filter(guest -> guest.getEventId().equals(eventId))
+                .toList();
+        return guests.stream()
+                .map(GuestMapperDBIT0019::mapToGuestResponseDTO)
+                .collect(Collectors.toList());
+    }
+    public List<GuestResponseDTODBIT0019> getGuestsByEventId(Long eventId) {
+        List<GuestDBIT0019> guests = guestRepositoryDBIT0019.findByEventId(eventId); // Assuming a method in repository to fetch guests by eventId
+        return guests.stream()
+                .map(guest -> new GuestResponseDTODBIT0019(
+                        guest.getId(),
+                        guest.getEventId(),
+                        guest.getName(),
+                        guest.getEmail(),
+                        guest.getRsvpStatus(),
+                        guest.isInvitationSent()
+                ))
+                .collect(Collectors.toList());
     }
 
 }

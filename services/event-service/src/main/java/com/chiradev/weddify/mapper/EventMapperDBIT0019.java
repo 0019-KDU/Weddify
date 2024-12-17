@@ -1,7 +1,10 @@
 package com.chiradev.weddify.mapper;
 
+import com.chiradev.weddify.client.GuestDto;
 import com.chiradev.weddify.dto.EventDtoDBIT0019;
 import com.chiradev.weddify.entity.EventDBIT0019;
+
+import java.util.List;
 
 public class EventMapperDBIT0019 {
 
@@ -12,6 +15,7 @@ public class EventMapperDBIT0019 {
                 eventDBIT0019.getEventDate(),
                 eventDBIT0019.getVenue(),
                 eventDBIT0019.getEventType()
+
         );
     }
 

@@ -7,6 +7,8 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 @RestController
 @RequestMapping("/api/guests")
 @RequiredArgsConstructor
@@ -30,6 +32,21 @@ public class GuestControllerDBIT0019 {
     public ResponseEntity<Void> deleteGuest(@PathVariable Long id) {
         guestServiceDBIT0019.deleteGuest(id);
         return ResponseEntity.noContent().build();
+    }
+    @GetMapping("/{eventId}")
+    public ResponseEntity<List<GuestResponseDTODBIT0019>> getGuestsByEventId(@PathVariable("eventId") Long eventId) {
+        List<GuestResponseDTODBIT0019> guests = guestServiceDBIT0019.getGuestsByEventId(eventId);
+        return ResponseEntity.ok(guests);
+    }
+    @PostMapping("/{id}/send-rsvp")
+    public ResponseEntity<Void> sendRsvpRequest(@PathVariable Long id) {
+        guestServiceDBIT0019.sendRsvpRequest(id);
+        return ResponseEntity.ok().build();
+    }
+
+    @GetMapping("/track")
+    public ResponseEntity<List<GuestResponseDTODBIT0019>> trackRsvpResponses(@RequestParam Long eventId) {
+        return ResponseEntity.ok(guestServiceDBIT0019.trackRsvpResponses(eventId));
     }
 
 }

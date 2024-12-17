@@ -1,5 +1,7 @@
 package com.chiradev.weddify.service;
 
+import com.chiradev.weddify.client.GuestClient;
+import com.chiradev.weddify.client.GuestDto;
 import com.chiradev.weddify.dto.EventDtoDBIT0019;
 import com.chiradev.weddify.entity.EventDBIT0019;
 import com.chiradev.weddify.exception.ResourceNotFoundException;
@@ -17,6 +19,7 @@ import java.util.stream.Collectors;
 public class EventServiceDBIT0019 {
 
     private  EventRepositoryDBIT0019 eventRepositoryDBIT0019;
+    private GuestClient guestClient;
 
     public EventDtoDBIT0019 createEvent(EventDtoDBIT0019 eventDtoDBIT0019) {
         // Mapping DTO to Entity
@@ -29,20 +32,40 @@ public class EventServiceDBIT0019 {
         return EventMapperDBIT0019.mapToEventDto(savedEvent);
     }
 
-    public EventDtoDBIT0019 getEventById(Long eventId){
-       EventDBIT0019 eventDBIT0019=   eventRepositoryDBIT0019.findById(eventId)
-                .orElseThrow(()->new
-                        ResourceNotFoundException("Employee is not exist with given id :" + eventId ));
+    // Get event by ID with specific guests for that event
+    public EventDtoDBIT0019 getEventById(Long eventId) {
+        // Fetch event from DB
+        EventDBIT0019 event = eventRepositoryDBIT0019.findById(eventId)
+                .orElseThrow(() -> new ResourceNotFoundException("Event not found with ID: " + eventId));
 
-       return EventMapperDBIT0019.mapToEventDto(eventDBIT0019);
+        // Convert event to DTO
+        EventDtoDBIT0019 eventDto = EventMapperDBIT0019.mapToEventDto(event);
+
+        // Fetch guests specific to this event using the GuestClient
+        List<GuestDto> guests = guestClient.getGuestsByEventId(eventId);  // Fetch guests based on eventId
+        eventDto.setGuests(guests);
+
+        return eventDto;
     }
 
-    public List<EventDtoDBIT0019> getAllEvents(){
-        List<EventDBIT0019> eventDBIT0019s=eventRepositoryDBIT0019.findAll();
-        return eventDBIT0019s.stream().map((EventMapperDBIT0019::mapToEventDto))
+    // Get all events with specific guest lists
+    public List<EventDtoDBIT0019> getAllEvents() {
+        // Fetch all events
+        List<EventDBIT0019> events = eventRepositoryDBIT0019.findAll();
+
+        // Map events to DTOs and enrich with guest information
+        return events.stream()
+                .map(event -> {
+                    EventDtoDBIT0019 eventDto = EventMapperDBIT0019.mapToEventDto(event);
+
+                    // Fetch guests specific to this event
+                    List<GuestDto> guests = guestClient.getGuestsByEventId(event.getEventId()); // Call Feign Client to get event-specific guests
+                    eventDto.setGuests(guests);
+
+                    return eventDto;
+                })
                 .collect(Collectors.toList());
     }
-
     public EventDtoDBIT0019 updateEvent(Long eventId,EventDtoDBIT0019 updateEvent){
         EventDBIT0019 event=eventRepositoryDBIT0019.findById(eventId)
                 .orElseThrow(()->new ResourceNotFoundException("Event is not exists with given id :" + eventId));
