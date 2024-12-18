@@ -29,6 +29,10 @@ public class VendorServiceDBIT0019 {
         return VendorMapperDBIT0019.mapToVendorDto(savedVendor);
     }
 
+    public boolean isVendorAvailable(Long vendorId) {
+        // Check if the vendor exists and is available
+        return vendorRepository.existsByIdAndAvailable(vendorId, true);
+    }
 
     @Transactional(readOnly = true) // ✅ Now Recognized
     public VendorDTOBIT0019 getVendorById(Long id) {
@@ -58,11 +62,11 @@ public class VendorServiceDBIT0019 {
         existingVendor.setNotes(vendorDTO.getNotes());
         existingVendor.setContactDetails(vendorDTO.getContactDetails());
         existingVendor.setPriceRange(vendorDTO.getPriceRange());
+        existingVendor.setAvailable(vendorDTO.getAvailable()); // Update availability status
 
         VendorDBIT0019 updatedVendor = vendorRepository.save(existingVendor);
         return VendorMapperDBIT0019.mapToVendorDto(updatedVendor);
     }
-
     public void deleteVendor(Long id) {
         log.info("Deleting vendor with id: {}", id);
         VendorDBIT0019 vendor = vendorRepository.findById(id)

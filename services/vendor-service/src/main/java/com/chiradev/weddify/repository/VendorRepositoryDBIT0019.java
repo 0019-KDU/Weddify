@@ -6,4 +6,5 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import java.util.UUID;
 
 public interface VendorRepositoryDBIT0019 extends JpaRepository<VendorDBIT0019, Long> {
+    boolean existsByIdAndAvailable(Long id, Boolean available);
 }

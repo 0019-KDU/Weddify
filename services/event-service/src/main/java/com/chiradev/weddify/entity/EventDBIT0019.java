@@ -33,4 +33,6 @@ public class EventDBIT0019 {
     @Column(name = "event_type", nullable = false)
     private EventType eventType;
 
+    @Column(name = "vendor_id", nullable = false)
+    private Long vendorId;
 }

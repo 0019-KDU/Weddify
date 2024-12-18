@@ -12,7 +12,8 @@ public class VendorMapperDBIT0019 {
                 vendorDBIT0019.getVendorType(),
                 vendorDBIT0019.getNotes(),
                 vendorDBIT0019.getContactDetails(),
-                vendorDBIT0019.getPriceRange()
+                vendorDBIT0019.getPriceRange(),
+                vendorDBIT0019.getAvailable()
 
         );
     }
@@ -24,7 +25,8 @@ public class VendorMapperDBIT0019 {
                 vendorDTOBIT0019.getVendorType(),
                 vendorDTOBIT0019.getNotes(),
                 vendorDTOBIT0019.getContactDetails(),
-                vendorDTOBIT0019.getPriceRange()
+                vendorDTOBIT0019.getPriceRange(),
+                vendorDTOBIT0019.getAvailable()
         );
     }
 }

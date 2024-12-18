@@ -37,4 +37,7 @@ public class VendorDTOBIT0019 {
             message = "Price range must be in the format 'min-max' with non-negative integers"
     )
     private String priceRange;
+
+    @NotNull(message = "Vendor availability status is mandatory")
+    private Boolean available;
 }

@@ -14,7 +14,9 @@ public class EventMapperDBIT0019 {
                 eventDBIT0019.getEventName(),
                 eventDBIT0019.getEventDate(),
                 eventDBIT0019.getVenue(),
-                eventDBIT0019.getEventType()
+                eventDBIT0019.getEventType(),
+                eventDBIT0019.getVendorId(),
+                null
 
         );
     }
@@ -25,7 +27,8 @@ public class EventMapperDBIT0019 {
                 eventDtoDBIT0019.getEventName(),
                 eventDtoDBIT0019.getEventDate(),
                 eventDtoDBIT0019.getVenue(),
-                eventDtoDBIT0019.getEventType()
+                eventDtoDBIT0019.getEventType(),
+                eventDtoDBIT0019.getVendorId()
         );
     }
 }

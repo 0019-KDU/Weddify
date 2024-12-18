@@ -49,4 +49,8 @@ public class VendorDBIT0019 {
     )
     private String priceRange;
 
+    @NotNull(message = "Vendor availability status is mandatory")
+    @Column(name = "available", nullable = false)
+    private Boolean available = false;
+
 }

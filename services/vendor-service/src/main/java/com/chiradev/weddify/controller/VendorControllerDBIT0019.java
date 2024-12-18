@@ -17,6 +17,16 @@ public class VendorControllerDBIT0019 {
 
     private final VendorServiceDBIT0019 vendorService;
 
+
+    @GetMapping("/{vendorId}/availability")
+    public ResponseEntity<Void> checkVendorAvailability(@PathVariable Long vendorId) {
+        boolean isAvailable = vendorService.isVendorAvailable(vendorId);
+        if (isAvailable) {
+            return ResponseEntity.ok().build();
+        } else {
+            return ResponseEntity.status(409).build(); // Conflict
+        }
+    }
     @PostMapping
     public ResponseEntity<VendorDTOBIT0019> createVendor(@Valid @RequestBody VendorDTOBIT0019 vendorDTO) {
         VendorDTOBIT0019 createdVendor = vendorService.createVendor(vendorDTO);
