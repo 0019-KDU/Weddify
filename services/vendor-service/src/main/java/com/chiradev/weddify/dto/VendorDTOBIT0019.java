@@ -15,6 +15,7 @@ import lombok.Setter;
 @AllArgsConstructor
 @NoArgsConstructor
 public class VendorDTOBIT0019 {
+
     private Long id;
 
     @NotBlank(message = "Vendor name is mandatory")
@@ -36,6 +37,7 @@ public class VendorDTOBIT0019 {
             regexp = "^[0-9]+-[0-9]+$",
             message = "Price range must be in the format 'min-max' with non-negative integers"
     )
+
     private String priceRange;
 
     @NotNull(message = "Vendor availability status is mandatory")

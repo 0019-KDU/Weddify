@@ -1,0 +1,92 @@
+Here is a proposed **system architecture** for the Wedding Planner Application:  
+
+---
+
+### **1. Microservices Overview**
+Each core functionality is implemented as a separate microservice:  
+
+- **Event Management Service**  
+- **Guest Management Service**  
+- **Vendor Scheduling Service**  
+- **Budget Tracking Service**  
+- **Task Management Service**  
+- **Notification Service**  
+
+Each microservice will have:  
+- Its own **database** (SQL/NoSQL) to ensure data independence and scalability.  
+- A RESTful API for communication with the API Gateway.  
+
+---
+
+### **2. Communication**
+#### **API Gateway**  
+- Central entry point for all client requests.  
+- Routes requests to appropriate microservices based on endpoints.  
+
+#### **Service Communication**  
+- **Synchronous Communication**: REST APIs for real-time data retrieval (e.g., Event Management querying Budget Tracking).  
+- **Asynchronous Communication**: Message queues (e.g., RabbitMQ, Kafka) for sending notifications or event-driven tasks.  
+
+---
+
+### **3. Databases**  
+- **Event Management**: SQL Database (e.g., PostgreSQL) for structured data like event details.  
+- **Guest Management**: SQL Database (e.g., MySQL) for guest information and RSVPs.  
+- **Vendor Scheduling**: SQL Database for vendor schedules.
+- **Budget Tracking**: NoSQL Database (e.g., MongoDB) for flexible budget and expense records.  
+- **Task Management**: SQL Database  for task details and status.
+- **Notification Service**: SQL Database (e.g., SQLite) for storing notification logs and preferences.  
+
+---
+
+### **4. Architecture Diagram**
+Below is a textual representation of the architecture:
+
+```
+                          +------------------+
+                          |  Client (Web/Mobile App) |
+                          +------------------+
+                                   |
+                                   v
+                          +------------------+
+                          |    API Gateway    |
+                          +------------------+
+                                   |
+         ---------------------------------------------------
+        |                 |                |               |
+        v                 v                v               v
++----------------+  +---------------+ +---------------+ +-----------------+
+| Event Mgmt     |  | Guest Mgmt    | | Vendor Sched  | | Budget Tracking |
+| Service        |  | Service       | | Service       | | Service         |
++----------------+  +---------------+ +---------------+ +-----------------+
+      |                    |                 |                   |
++-------------+    +-------------+   +-------------+   +------------------+
+| Postgres DB |    | MySQL DB    |   |    DB       |   |         DB       |
++-------------+    +-------------+   +-------------+   +------------------+
+         |
+         |
+---------------------------------------------------
+        |                 |               |
+        v                 v               v
++----------------+  +----------------+ +----------------+
+| Task Mgmt      |  | Notification   | | Other Services |
+| Service        |  | Service        | | (if needed)    |
++----------------+  +----------------+ +----------------+
+      |                    |
++-------------+      +------------+
+| Firestore DB|      | SQLite DB  |
++-------------+      +------------+
+
+```
+
+---
+
+### **5. Key Features of the Architecture**
+- **Decoupled Services**: Each service is independent and modular for easy maintenance.  
+- **Scalability**: Microservices can scale independently based on demand (e.g., Notification Service can scale for high traffic).  
+- **Security**: API Gateway handles authentication, authorization, and rate limiting.  
+- **Resilience**: Message queues enable fault tolerance for asynchronous tasks.  
+
+---
+
+This architecture ensures the Wedding Planner Application is scalable, maintainable, and efficient. Let me know if you'd like a visual diagram or further enhancements!  
