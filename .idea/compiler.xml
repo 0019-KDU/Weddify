@@ -8,6 +8,7 @@
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
         <module name="config-server" />
+        <module name="vendor-service" />
         <module name="guest-service" />
         <module name="event-service" />
         <module name="discovery" />
@@ -20,6 +21,7 @@
       <module name="discovery" options="-parameters" />
       <module name="event-service" options="-parameters" />
       <module name="guest-service" options="-parameters" />
+      <module name="vendor-service" options="-parameters" />
     </option>
   </component>
 </project>

@@ -87,5 +87,4 @@ public class EventServiceDBIT0019 {
         eventRepositoryDBIT0019.deleteById(eventId);
     }
 
-
 }
