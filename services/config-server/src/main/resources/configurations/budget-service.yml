@@ -1,0 +1,27 @@
+spring:
+  datasource:
+    url: jdbc:mysql://localhost:3306/budget-service
+    username: root
+    password: 12345@dev
+    driver-class-name: com.mysql.cj.jdbc.Driver
+
+  jpa:
+    hibernate:
+      ddl-auto: update
+    show-sql: true
+
+# Service URLs
+services:
+  vendor-service:
+    url: http://localhost:8070/api/vendors
+  event-service:
+    url: http://localhost:8090/api/events
+
+# Logging Configuration
+logging:
+  level:
+    root: INFO
+    com.chiradev.weddify: DEBUG
+
+server:
+  port: 8085
