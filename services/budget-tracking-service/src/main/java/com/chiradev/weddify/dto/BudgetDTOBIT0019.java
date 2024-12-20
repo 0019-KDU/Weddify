@@ -1,5 +1,8 @@
 package com.chiradev.weddify.dto;
 
+import jakarta.persistence.CascadeType;
+import jakarta.persistence.OneToMany;
+import jakarta.persistence.Transient;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Positive;
@@ -26,5 +29,9 @@ public class BudgetDTOBIT0019 {
     @Positive(message = "Total budget must be a positive number")
     private Double totalBudget;
 
+    @OneToMany(mappedBy = "vendor", cascade = CascadeType.ALL, orphanRemoval = true)
     private Set<ExpenseDTOBIT0019> expenses;
+
+    @Transient
+    private Double remainingBudget;
 }

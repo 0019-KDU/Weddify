@@ -43,7 +43,7 @@ public class ExpenseDBIT0019 {
     @JoinColumn(name = "budget_id", nullable = false)
     private BudgetDBIT0019 budget;
 
-    // Optional: Reference to Vendor
-    @Column(name = "vendor_id")
+    // Vendor ID as a simple reference (no foreign key constraint)
+    @Column(name = "vendor_id", nullable = true)
     private Long vendorId;
 }

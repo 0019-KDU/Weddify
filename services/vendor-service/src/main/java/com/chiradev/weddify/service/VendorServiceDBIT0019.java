@@ -30,9 +30,12 @@ public class VendorServiceDBIT0019 {
     }
 
     public boolean isVendorAvailable(Long vendorId) {
-        // Check if the vendor exists and is available
-        return vendorRepository.existsByIdAndAvailable(vendorId, true);
+        System.out.println("Vendor ID: " + vendorId);
+        boolean result = vendorRepository.existsByIdAndAvailable(vendorId, true);
+        System.out.println("Is vendor available: " + result);
+        return result;
     }
+
 
     @Transactional(readOnly = true) // ✅ Now Recognized
     public VendorDTOBIT0019 getVendorById(Long id) {

@@ -31,5 +31,7 @@ public class ExpenseDTOBIT0019 {
 
     private Long budgetId; // For associating with Budget
 
-    private Long vendorId; // Optional: To link expense to a vendor
+    private Long vendorId; // To link expense to a vendor
+
+    private Long eventId; // Optional: To link expense to an event
 }

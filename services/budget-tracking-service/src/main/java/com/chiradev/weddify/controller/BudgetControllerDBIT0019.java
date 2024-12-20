@@ -24,6 +24,7 @@ public class BudgetControllerDBIT0019 {
         return new ResponseEntity<>(createdBudget, HttpStatus.CREATED);
     }
 
+
     @PostMapping("/{budgetId}/expenses")
     public ResponseEntity<ExpenseDTOBIT0019> addExpense(@PathVariable Long budgetId,
                                                         @Valid @RequestBody ExpenseDTOBIT0019 expenseDTO) {
@@ -31,17 +32,20 @@ public class BudgetControllerDBIT0019 {
         return new ResponseEntity<>(createdExpense, HttpStatus.CREATED);
     }
 
+
     @GetMapping("/{budgetId}/summary")
     public ResponseEntity<BudgetDTOBIT0019> getBudgetSummary(@PathVariable Long budgetId) {
         BudgetDTOBIT0019 budgetSummary = budgetService.getBudgetSummary(budgetId);
         return ResponseEntity.ok(budgetSummary);
     }
 
+
     @GetMapping("/expenses/{expenseId}")
     public ResponseEntity<ExpenseDTOBIT0019> getExpenseDetails(@PathVariable Long expenseId) {
         ExpenseDTOBIT0019 expenseDetails = budgetService.getExpenseDetails(expenseId);
         return ResponseEntity.ok(expenseDetails);
     }
+
 
     @GetMapping("/{budgetId}/expenses")
     public ResponseEntity<List<ExpenseDTOBIT0019>> getAllExpenses(@PathVariable Long budgetId) {

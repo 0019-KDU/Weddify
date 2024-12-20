@@ -39,4 +39,8 @@ public class BudgetDBIT0019 {
     // Initialize the expenses set to prevent NullPointerException
     @OneToMany(mappedBy = "budget", cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.LAZY)
     private Set<ExpenseDBIT0019> expenses = new HashSet<>();
+
+    @Transient
+    // New field for remaining budget
+    private Double remainingBudget;
 }
