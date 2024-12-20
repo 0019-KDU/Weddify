@@ -20,6 +20,7 @@ public class EventDtoDBIT0019 {
     private EventType eventType;
     private Long vendorId;
     private List<GuestDto> guests;
+    private List<TaskResponseDTODBIT0019> tasks;
 
     // Add a constructor with 5 parameters excluding the guests
     public EventDtoDBIT0019(Long eventId, String eventName, Date eventDate, String venue, EventType eventType) {

@@ -13,4 +13,11 @@ public class WebClientConfig {
                 .baseUrl("http://localhost:8070/api/vendors") // Replace with Vendor Service URL
                 .build();
     }
+
+    @Bean
+    public WebClient taskServiceWebClient() {
+        return WebClient.builder()
+                .baseUrl("http://localhost:8095") // Replace with the actual Task Service URL
+                .build();
+    }
 }

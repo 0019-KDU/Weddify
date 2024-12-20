@@ -1,0 +1,28 @@
+server:
+  port: 8095  # Ensure this port matches your API Gateway configuration
+
+spring:
+  datasource:
+    url: jdbc:postgresql://localhost:5432/task_management_db
+    username: postgres
+    password: 12345q
+    driver-class-name: org.postgresql.Driver
+
+  jpa:
+    hibernate:
+      ddl-auto: update  # Use 'validate' or 'none' in production
+    show-sql: true
+    properties:
+      hibernate:
+        format_sql: true
+
+  # Optional: Specify the context path if needed
+  # servlet:
+  #   context-path: /api
+
+# Logging Configuration (Optional)
+logging:
+  level:
+    org:
+      springframework:
+        web: DEBUG
