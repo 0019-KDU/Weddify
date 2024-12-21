@@ -12,6 +12,7 @@
         <option value="$PROJECT_DIR$/services/budget-tracking-service/pom.xml" />
         <option value="$PROJECT_DIR$/services/shared-library/pom.xml" />
         <option value="$PROJECT_DIR$/services/task-service/pom.xml" />
+        <option value="$PROJECT_DIR$/services/notification-service/pom.xml" />
       </list>
     </option>
     <option name="ignoredFiles">
