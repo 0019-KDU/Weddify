@@ -1,34 +1,53 @@
 server:
-  port: 8089
+  port: 8065
 
 spring:
   data:
     mongodb:
       uri: mongodb+srv://chirantharavishka:12345mon@cluster0.dposl.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0
       database: notification_db
+
   mail:
     host: smtp.gmail.com
     port: 587
     username: anuruddhairusha871@gmail.com
-    password: ulfd opzj oqpf txns
+    password: ulfd opzj oqpf txns  # Replace with your actual App Password
     properties:
       mail:
         smtp:
           auth: true
           starttls:
             enable: true
-kafka:
-  bootstrap-servers: localhost:9092
-  consumer:
-    group-id: notification-service-group
-    auto-offset-reset: earliest
-    key-deserializer: org.apache.kafka.common.serialization.StringDeserializer
-    value-deserializer: org.apache.kafka.common.serialization.StringDeserializer
-  producer:
-    key-serializer: org.apache.kafka.common.serialization.StringSerializer
-    value-serializer: org.apache.kafka.common.serialization.StringSerializer
+
+  kafka:
+    bootstrap-servers: localhost:9092  # Moved here from consumer
+    consumer:
+      group-id: notification-service-group
+      auto-offset-reset: earliest
+      key-deserializer: org.apache.kafka.common.serialization.StringDeserializer
+      value-deserializer: org.apache.kafka.common.serialization.StringDeserializer
+    producer:
+      key-serializer: org.apache.kafka.common.serialization.StringSerializer
+      value-serializer: org.apache.kafka.common.serialization.StringSerializer
 
 logging:
   level:
     root: info
     org.springframework: debug
+
+# Custom Configuration for the Notification Service
+notification-service:
+  email:
+    template-path: /templates  # Location of FreeMarker templates
+    default-reminder-subject: "Reminder for Your Wedding Task"  # Default email subject for reminders
+    from-address: "anuruddhairusha871@gmail.com"  # Change this to your application's email address
+
+# Management Configurations (Optional)
+management:
+  endpoints:
+    web:
+      exposure:
+        include: "*"
+  endpoint:
+    health:
+      show-details: always

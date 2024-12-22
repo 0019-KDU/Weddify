@@ -13,7 +13,6 @@ import org.springframework.stereotype.Component;
 @RequiredArgsConstructor
 @Slf4j
 public class NotificationListenerDBIT0019 {
-    private final ObjectMapper objectMapper;
     private final EmailServiceDBIT0019 emailService;
     private final NotificationServiceDBIT0019 notificationService;
 
@@ -21,12 +20,14 @@ public class NotificationListenerDBIT0019 {
     public void listen(String message) {
         try {
             // Assuming the message is the notification ID
-            NotificationDBIT0019 notification = notificationService.getNotificationById(message);
+            String notificationId = message;
+            NotificationDBIT0019 notification = notificationService.getNotificationById(notificationId);
             emailService.sendEmail(notification);
-            notificationService.updateNotificationStatus(message, "SENT");
+            notificationService.updateNotificationStatus(notificationId, "SENT");
         } catch (Exception e) {
             log.error("Error processing notification: {}", e.getMessage());
             // Optionally, update notification status to FAILED
+            // notificationService.updateNotificationStatus(notificationId, "FAILED");
         }
     }
 }
