@@ -15,6 +15,7 @@
         <module name="task-service" />
         <module name="guest-service" />
         <module name="notification-service" />
+        <module name="gateway" />
       </profile>
     </annotationProcessing>
     <bytecodeTargetLevel>
@@ -27,6 +28,7 @@
       <module name="config-server" options="-parameters" />
       <module name="discovery" options="-parameters" />
       <module name="event-service" options="-parameters" />
+      <module name="gateway" options="-parameters" />
       <module name="guest-service" options="-parameters" />
       <module name="notification-service" options="-parameters" />
       <module name="shared-library" options="-parameters" />
